@@ -17,55 +17,57 @@ body{
     min-height:100vh;
     display:flex;
     justify-content:center;
-    align-items:center;
+    align-items:flex-start;
+    padding:25px 15px;
+    overflow-y:auto;
     font-family:Georgia, serif;
-    overflow:hidden;
-    background:url('https://images.unsplash.com/photo-1597848212624-a19eb35e2651?q=80&w=1600&auto=format&fit=crop') center center/cover no-repeat;
-}
-
-body::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,0.35);
+    background:linear-gradient(180deg,#fff8d6,#ffe88e);
 }
 
 .card{
+    width:100%;
+    max-width:700px;
+    background:rgba(255,255,255,0.92);
+    padding:30px;
+    border-radius:30px;
+    text-align:center;
+    box-shadow:0 10px 35px rgba(0,0,0,0.2);
     position:relative;
     z-index:2;
-    width:90%;
-    max-width:700px;
-    padding:40px;
-    border-radius:25px;
-    text-align:center;
-    background:rgba(255,255,255,0.15);
-    backdrop-filter:blur(10px);
-    border:1px solid rgba(255,255,255,0.3);
-    color:white;
-    box-shadow:0 15px 40px rgba(0,0,0,0.4);
 }
 
 h1{
-    font-size:2.5rem;
+    color:#d4a017;
     margin-bottom:20px;
-    color:#fff8a6;
+    font-size:2.2rem;
 }
 
 p{
-    font-size:1.25rem;
-    line-height:1.8;
+    font-size:1.2rem;
+    line-height:1.9;
+    color:#444;
+}
+
+.bouquet{
+    width:100%;
+    max-width:350px;
+    margin:30px auto;
+    display:block;
+    border-radius:20px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.15);
 }
 
 .signature{
-    margin-top:25px;
-    font-size:1.6rem;
-    color:#ffe76a;
+    margin-top:20px;
+    color:#c89b00;
+    font-size:1.5rem;
+    font-weight:bold;
 }
 
 .flower{
-    position:absolute;
+    position:fixed;
     top:-50px;
-    font-size:35px;
+    font-size:30px;
     pointer-events:none;
     animation:fall linear infinite;
 }
@@ -100,7 +102,7 @@ Aunque tuve un accidente y no pude entregarte tus flores amarillas como me hubie
 <br>
 
 <p>
-Por eso preparé este pequeño detalle para ti, porque eres una persona muy especial para mí y mereces todas las flores amarillas del mundo.
+Por eso preparé este pequeño detalle para ti. Porque eres una persona muy especial para mí y mereces todas las flores amarillas del mundo.
 </p>
 
 <br>
@@ -115,6 +117,8 @@ Gracias por tu amor, por tu paciencia, por tu compañía y por llenar mis días 
 Espero que estas flores amarillas iluminen tu día tanto como tú iluminas mi vida. 🌻✨
 </p>
 
+https://images.unsplash.com/photo-1527061011665-3652c757a4d4?auto=format&fit=crop&w=800&q=80
+
 <div class="signature">
 💛 Con mucho amor,<br>
 Tu novio Stiven 💛
@@ -123,12 +127,12 @@ Tu novio Stiven 💛
 </div>
 
 <script>
-for(let i=0;i<50;i++){
+for(let i=0;i<40;i++){
     let flower=document.createElement("div");
     flower.className="flower";
     flower.innerHTML=Math.random()>0.5 ? "🌻" : "💛";
     flower.style.left=Math.random()*100+"vw";
-    flower.style.animationDuration=(5+Math.random()*8)+"s";
+    flower.style.animationDuration=(8+Math.random()*8)+"s";
     flower.style.animationDelay=Math.random()*5+"s";
     document.body.appendChild(flower);
 }
