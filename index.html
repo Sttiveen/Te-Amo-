@@ -1,40 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🌻 Para Mi Pollito Hermosa 💛</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Georgia, serif;
+    overflow:hidden;
+    background:url('https://images.unsplash.com/photo-1597848212624-a19eb35e2651?q=80&w=1600&auto=format&fit=crop') center center/cover no-repeat;
+}
+
+body::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.35);
+}
+
+.card{
+    position:relative;
+    z-index:2;
+    width:90%;
+    max-width:700px;
+    padding:40px;
+    border-radius:25px;
+    text-align:center;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.3);
+    color:white;
+    box-shadow:0 15px 40px rgba(0,0,0,0.4);
+}
+
+h1{
+    font-size:2.5rem;
+    margin-bottom:20px;
+    color:#fff8a6;
+}
+
+p{
+    font-size:1.25rem;
+    line-height:1.8;
+}
+
+.signature{
+    margin-top:25px;
+    font-size:1.6rem;
+    color:#ffe76a;
+}
+
+.flower{
+    position:absolute;
+    top:-50px;
+    font-size:35px;
+    pointer-events:none;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    from{
+        transform:translateY(-100px) rotate(0deg);
+    }
+    to{
+        transform:translateY(120vh) rotate(360deg);
+    }
+}
+</style>
+</head>
+
+<body>
+
 <div class="card">
-    <h1>🌻 Para Mi Pollito Hermosa 🌻</h1>
 
-    <p>
-        Te amo mucho, mi pollito hermosa. 💛
-    </p>
+<h1>🌻 Para Mi Pollito Hermosa 🌻</h1>
 
-    <br>
+<p>
+Te amo mucho, mi pollito hermosa. 💛
+</p>
 
-    <p>
-        Aunque tuve un accidente y no pude llevarte tus flores amarillas
-        como me hubiera gustado, no quería que te quedaras sin ellas.
-    </p>
+<br>
 
-    <br>
+<p>
+Aunque tuve un accidente y no pude entregarte tus flores amarillas como me hubiera gustado, no quería que te quedaras sin ellas.
+</p>
 
-    <p>
-        Por eso te regalo estas flores, junto con todo mi amor,
-        para recordarte lo especial, hermosa e importante que eres para mí.
-    </p>
+<br>
 
-    <br>
+<p>
+Por eso preparé este pequeño detalle para ti, porque eres una persona muy especial para mí y mereces todas las flores amarillas del mundo.
+</p>
 
-    <p>
-        Gracias por alegrar mis días, acompañarme y hacer que mi vida
-        sea mucho más bonita desde que llegaste a ella.
-    </p>
+<br>
 
-    <br>
+<p>
+Gracias por tu amor, por tu paciencia, por tu compañía y por llenar mis días de felicidad.
+</p>
 
-    <p>
-        Espero que estas flores amarillas te saquen una sonrisa tan hermosa
-        como la que tú me sacas a mí todos los días. 🌻✨
-    </p>
+<br>
 
-    <div class="signature">
-        💛 Con mucho amor,<br>
-        Tu novio Stiven 💛
-    </div>
+<p>
+Espero que estas flores amarillas iluminen tu día tanto como tú iluminas mi vida. 🌻✨
+</p>
+
+<div class="signature">
+💛 Con mucho amor,<br>
+Tu novio Stiven 💛
 </div>
+
+</div>
+
+<script>
+for(let i=0;i<50;i++){
+    let flower=document.createElement("div");
+    flower.className="flower";
+    flower.innerHTML=Math.random()>0.5 ? "🌻" : "💛";
+    flower.style.left=Math.random()*100+"vw";
+    flower.style.animationDuration=(5+Math.random()*8)+"s";
+    flower.style.animationDelay=Math.random()*5+"s";
+    document.body.appendChild(flower);
+}
+</script>
+
+</body>
+</html>
