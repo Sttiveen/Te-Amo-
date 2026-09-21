@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ti 🌻</title>
+
+<style>
+body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#fff9c4,#ffe082);
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    text-align:center;
+    max-width:500px;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    z-index:2;
+}
+
+h1{
+    color:#d4a017;
+}
+
+p{
+    color:#555;
+    font-size:18px;
+    line-height:1.6;
+}
+
+.flower{
+    position:absolute;
+    font-size:40px;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    from{
+        transform:translateY(-100px) rotate(0deg);
+    }
+    to{
+        transform:translateY(110vh) rotate(360deg);
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h1>🌻 Flores Amarillas Para Ti 🌻</h1>
+
+    <p>
+        Porque iluminas mis días como el sol ilumina estas flores.
+    </p>
+
+    <p>
+        Gracias por existir y por hacer mi vida más bonita. 💛
+    </p>
+
+    <h2>TE AMO MI POLLITO ❤️‍🩹🌻
+        
+    </h2>
+</div>
+
+<script>
+for(let i=0;i<30;i++){
+    let flower=document.createElement("div");
+    flower.className="flower";
+    flower.innerHTML="🌻";
+    flower.style.left=Math.random()*100+"vw";
+    flower.style.animationDuration=(5+Math.random()*10)+"s";
+    flower.style.animationDelay=Math.random()*5+"s";
+    document.body.appendChild(flower);
+}
+</script>
+
+</body>
+</html>
