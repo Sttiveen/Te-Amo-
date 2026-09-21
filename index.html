@@ -1,138 +1,441 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi Pollito Hermosa 💛</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Typography Styles */
+        .font-handwriting { font-family: 'Caveat', cursive; }
+        .font-signature { font-family: 'Dancing Script', cursive; }
+        .font-body { font-family: 'Lora', serif; }
 
-<title>🌻 Para Mi Pollito Hermosa 💛</title>
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: rgba(18, 12, 6, 0.52);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1.5px solid rgba(251, 191, 36, 0.5);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(251, 191, 36, 0.2);
+        }
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        /* Golden Glow text */
+        .glow-text {
+            text-shadow: 0 0 12px rgba(254, 240, 138, 0.7), 0 0 28px rgba(234, 179, 8, 0.5);
+        }
 
-body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:Georgia, serif;
-    overflow:hidden;
-    background:url('https://images.unsplash.com/photo-1597848212624-a19eb35e2651?q=80&w=1600&auto=format&fit=crop') center center/cover no-repeat;
-}
+        /* Falling Petals Canvas Overlay */
+        #petals-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
 
-body::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,0.35);
-}
+        /* Animations */
+        @keyframes gentle-float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1.2deg); }
+        }
+        .animate-float {
+            animation: gentle-float 4s ease-in-out infinite;
+        }
 
-.card{
-    position:relative;
-    z-index:2;
-    width:90%;
-    max-width:700px;
-    padding:40px;
-    border-radius:25px;
-    text-align:center;
-    background:rgba(255,255,255,0.15);
-    backdrop-filter:blur(10px);
-    border:1px solid rgba(255,255,255,0.3);
-    color:white;
-    box-shadow:0 15px 40px rgba(0,0,0,0.4);
-}
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 12px rgba(253, 224, 71, 0.5)); }
+            50% { opacity: 0.95; filter: drop-shadow(0 0 24px rgba(253, 224, 71, 0.85)); }
+        }
+        .animate-glow {
+            animation: pulse-glow 3.5s ease-in-out infinite;
+        }
 
-h1{
-    font-size:2.5rem;
-    margin-bottom:20px;
-    color:#fff8a6;
-}
+        /* Custom Theme Background Classes */
+        .theme-sunset {
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(253, 224, 71, 0.4) 0%, transparent 60%),
+                linear-gradient(to bottom, rgba(30, 10, 0, 0.3), rgba(60, 20, 5, 0.75)),
+                url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
 
-p{
-    font-size:1.25rem;
-    line-height:1.8;
-}
+        .theme-night {
+            background-image: 
+                radial-gradient(circle at 50% 30%, rgba(250, 204, 21, 0.25) 0%, transparent 50%),
+                linear-gradient(to bottom, rgba(15, 23, 42, 0.6), rgba(30, 15, 5, 0.85)),
+                url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
 
-.signature{
-    margin-top:25px;
-    font-size:1.6rem;
-    color:#ffe76a;
-}
-
-.flower{
-    position:absolute;
-    top:-50px;
-    font-size:35px;
-    pointer-events:none;
-    animation:fall linear infinite;
-}
-
-@keyframes fall{
-    from{
-        transform:translateY(-100px) rotate(0deg);
-    }
-    to{
-        transform:translateY(120vh) rotate(360deg);
-    }
-}
-</style>
+        .theme-gold {
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(254, 240, 138, 0.2) 0%, transparent 70%),
+                linear-gradient(to bottom, rgba(20, 15, 5, 0.7), rgba(40, 25, 5, 0.9)),
+                url('https://images.unsplash.com/photo-1518895949257-7621c3c786d7?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
 </head>
+<body id="bg-body" class="theme-sunset min-h-screen text-amber-50 flex items-center justify-center p-3 sm:p-6 overflow-x-hidden relative font-body transition-all duration-700">
 
-<body>
+    <!-- Canvas for falling sunflower petals -->
+    <canvas id="petals-canvas"></canvas>
 
-<div class="card">
+    <div class="relative z-20 max-w-xl w-full my-6">
+        
+        <!-- Controls Bar: Music & Background Switcher -->
+        <div class="flex flex-wrap justify-between items-center gap-2 mb-3 px-1">
+            <button id="bg-music-btn" class="flex items-center gap-2 bg-amber-950/70 hover:bg-amber-900/90 border border-amber-400/50 text-amber-200 text-xs sm:text-sm px-3.5 py-1.5 rounded-full transition-all backdrop-blur-md shadow-lg">
+                <span id="music-icon">🎵</span>
+                <span id="music-text">Música suave</span>
+            </button>
 
-<h1>🌻 Para Mi Pollito Hermosa 🌻</h1>
+            <!-- Theme Switcher Buttons -->
+            <div class="flex items-center gap-1.5 bg-black/40 backdrop-blur-md p-1 rounded-full border border-amber-400/30">
+                <button onclick="setTheme('theme-sunset')" class="text-xs px-2.5 py-1 rounded-full text-amber-200 hover:bg-amber-500/30 transition-all active:scale-95" title="Atardecer Cálido">
+                    🌅 Atardecer
+                </button>
+                <button onclick="setTheme('theme-night')" class="text-xs px-2.5 py-1 rounded-full text-amber-200 hover:bg-amber-500/30 transition-all active:scale-95" title="Campo Estrellado">
+                    🌌 Noche
+                </button>
+                <button onclick="setTheme('theme-gold')" class="text-xs px-2.5 py-1 rounded-full text-amber-200 hover:bg-amber-500/30 transition-all active:scale-95" title="Dorado Elegante">
+                    ✨ Dorado
+                </button>
+            </div>
+        </div>
 
-<p>
-Te amo mucho, mi pollito hermosa. 💛
-</p>
+        <!-- Main Card Container -->
+        <div class="glass-card rounded-3xl p-6 sm:p-10 text-center relative overflow-hidden transition-all duration-500">
+            
+            <!-- Corner Decorative Heart Line -->
+            <div class="absolute top-4 right-4 text-amber-300/80 pointer-events-none">
+                <svg width="42" height="42" viewBox="0 0 50 50" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path d="M25 38 C 10 25, 5 15, 15 8 C 22 3, 25 12, 25 12 C 25 12, 28 3, 35 8 C 45 15, 40 25, 25 38 Z"/>
+                </svg>
+            </div>
 
-<br>
+            <!-- Main Title -->
+            <h1 class="font-handwriting text-3xl sm:text-4xl md:text-5xl text-amber-300 font-bold mb-6 tracking-wide glow-text flex items-center justify-center gap-2">
+                <span class="text-amber-400 font-normal">♡</span>
+                <span>Para mi Pollito Hermosa</span>
+                <span class="text-amber-400 font-normal">♡</span>
+            </h1>
 
-<p>
-Aunque tuve un accidente y no pude entregarte tus flores amarillas como me hubiera gustado, no quería que te quedaras sin ellas.
-</p>
+            <!-- Message Body (Exact Original Message) -->
+            <div class="space-y-4 text-sm sm:text-base leading-relaxed text-amber-100/90 font-light max-w-md mx-auto">
+                <p class="text-base sm:text-lg font-medium text-amber-200">
+                    Te amo mucho, mi pollito hermosa. 💛
+                </p>
+                <p>
+                    Aunque tuve un accidente y no pude entregarte tus flores amarillas como me hubiera gustado, no quería que te quedaras sin ellas.
+                </p>
+                <p>
+                    Por eso preparé este pequeño detalle para ti, porque eres una persona muy especial para mí y mereces todas las flores amarillas del mundo.
+                </p>
+                <p>
+                    Gracias por tu amor, por tu paciencia, por tu compañía y por llenar mis días de felicidad.
+                </p>
+                <p class="pt-1 text-amber-200">
+                    Espero que estas flores amarillas iluminen tu día tanto como tú iluminas mi vida. 🌻✨
+                </p>
+            </div>
 
-<br>
+            <!-- Flower Bouquet Illustration -->
+            <div class="my-6 relative flex justify-center items-center">
+                
+                <!-- Floating Decorative Hearts -->
+                <div class="absolute -left-2 top-10 text-amber-300/60 animate-pulse pointer-events-none">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </div>
+                <div class="absolute -right-2 bottom-12 text-amber-300/60 animate-pulse pointer-events-none">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </div>
 
-<p>
-Por eso preparé este pequeño detalle para ti, porque eres una persona muy especial para mí y mereces todas las flores amarillas del mundo.
-</p>
+                <!-- Bouquet SVG with Float Animation -->
+                <div class="animate-float cursor-pointer transform transition-transform hover:scale-105 active:scale-95" id="bouquet-trigger" title="¡Haz clic en las flores!">
+                    <svg width="210" height="240" viewBox="0 0 200 230" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-2xl">
+                        <!-- Yellow Glow Behind Bouquet -->
+                        <circle cx="100" cy="80" r="65" fill="#FACC15" opacity="0.28" class="animate-glow" />
 
-<br>
+                        <!-- Pink Paper Wrapping Back -->
+                        <path d="M60 110 L100 200 L140 110 Q160 80 140 60 L60 60 Q40 80 60 110 Z" fill="#F472B6" opacity="0.85"/>
+                        
+                        <!-- Green Foliage -->
+                        <circle cx="70" cy="85" r="22" fill="#4ADE80"/>
+                        <circle cx="130" cy="85" r="22" fill="#4ADE80"/>
+                        <circle cx="100" cy="60" r="25" fill="#22C55E"/>
+                        <circle cx="75" cy="60" r="20" fill="#16A34A"/>
+                        <circle cx="125" cy="60" r="20" fill="#16A34A"/>
 
-<p>
-Gracias por tu amor, por tu paciencia, por tu compañía y por llenar mis días de felicidad.
-</p>
+                        <!-- Yellow Roses Bunch -->
+                        <!-- Rose 1 Top Center -->
+                        <g transform="translate(100, 52)">
+                            <circle cx="0" cy="0" r="18" fill="#FACC15"/>
+                            <circle cx="-3" cy="-3" r="12" fill="#EAB308"/>
+                            <path d="M-6 -2 C -2 -10, 6 -10, 8 -2 C 4 6, -4 6, -6 -2 Z" fill="#FDE047"/>
+                            <circle cx="1" cy="-1" r="6" fill="#CA8A04"/>
+                        </g>
 
-<br>
+                        <!-- Rose 2 Left -->
+                        <g transform="translate(72, 70)">
+                            <circle cx="0" cy="0" r="17" fill="#FACC15"/>
+                            <circle cx="-2" cy="-2" r="11" fill="#EAB308"/>
+                            <path d="M-5 -2 C -1 -8, 5 -8, 7 -2 C 3 5, -3 5, -5 -2 Z" fill="#FDE047"/>
+                            <circle cx="0" cy="0" r="5" fill="#CA8A04"/>
+                        </g>
 
-<p>
-Espero que estas flores amarillas iluminen tu día tanto como tú iluminas mi vida. 🌻✨
-</p>
+                        <!-- Rose 3 Right -->
+                        <g transform="translate(128, 70)">
+                            <circle cx="0" cy="0" r="17" fill="#FACC15"/>
+                            <circle cx="-2" cy="-2" r="11" fill="#EAB308"/>
+                            <path d="M-5 -2 C -1 -8, 5 -8, 7 -2 C 3 5, -3 5, -5 -2 Z" fill="#FDE047"/>
+                            <circle cx="0" cy="0" r="5" fill="#CA8A04"/>
+                        </g>
 
-<div class="signature">
-💛 Con mucho amor,<br>
-Tu novio Stiven 💛
-</div>
+                        <!-- Rose 4 Center Front -->
+                        <g transform="translate(100, 82)">
+                            <circle cx="0" cy="0" r="20" fill="#FDE047"/>
+                            <circle cx="-2" cy="-2" r="14" fill="#FACC15"/>
+                            <path d="M-7 -2 C -2 -10, 7 -10, 9 -2 C 5 7, -5 7, -7 -2 Z" fill="#EAB308"/>
+                            <circle cx="0" cy="0" r="7" fill="#CA8A04"/>
+                        </g>
 
-</div>
+                        <!-- Rose 5 Bottom Left -->
+                        <g transform="translate(80, 100)">
+                            <circle cx="0" cy="0" r="16" fill="#FACC15"/>
+                            <circle cx="-1" cy="-1" r="10" fill="#EAB308"/>
+                            <circle cx="0" cy="0" r="5" fill="#FDE047"/>
+                        </g>
 
-<script>
-for(let i=0;i<50;i++){
-    let flower=document.createElement("div");
-    flower.className="flower";
-    flower.innerHTML=Math.random()>0.5 ? "🌻" : "💛";
-    flower.style.left=Math.random()*100+"vw";
-    flower.style.animationDuration=(5+Math.random()*8)+"s";
-    flower.style.animationDelay=Math.random()*5+"s";
-    document.body.appendChild(flower);
-}
-</script>
+                        <!-- Rose 6 Bottom Right -->
+                        <g transform="translate(120, 100)">
+                            <circle cx="0" cy="0" r="16" fill="#FACC15"/>
+                            <circle cx="-1" cy="-1" r="10" fill="#EAB308"/>
+                            <circle cx="0" cy="0" r="5" fill="#FDE047"/>
+                        </g>
 
+                        <!-- Pink Wrapping Front Paper Overlap with Dots -->
+                        <path d="M55 105 Q 100 135 145 105 L 120 180 Q 100 195 80 180 Z" fill="#F472B6"/>
+                        <path d="M62 110 Q 100 138 138 110 L 115 175 Q 100 188 85 175 Z" fill="#FB7185"/>
+
+                        <!-- Polka Dots on Paper -->
+                        <circle cx="80" cy="130" r="2" fill="#FCE7F3" opacity="0.7"/>
+                        <circle cx="100" cy="140" r="2.5" fill="#FCE7F3" opacity="0.7"/>
+                        <circle cx="120" cy="130" r="2" fill="#FCE7F3" opacity="0.7"/>
+                        <circle cx="90" cy="155" r="2" fill="#FCE7F3" opacity="0.7"/>
+                        <circle cx="110" cy="158" r="2" fill="#FCE7F3" opacity="0.7"/>
+
+                        <!-- Ribbon Bow -->
+                        <g transform="translate(100, 168)">
+                            <path d="M0 0 C -20 -15, -25 5, 0 0 Z" fill="#E11D48"/>
+                            <path d="M0 0 C 20 -15, 25 5, 0 0 Z" fill="#E11D48"/>
+                            <path d="M-2 0 C -15 15, -20 25, -15 28 C -10 28, -5 18, 0 0 Z" fill="#BE123C"/>
+                            <path d="M2 0 C 15 15, 20 25, 15 28 C 10 28, 5 18, 0 0 Z" fill="#BE123C"/>
+                            <circle cx="0" cy="0" r="4.5" fill="#9F1239"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Signature Footer -->
+            <div class="mt-4 pt-1">
+                <p class="font-signature text-2xl text-amber-200/90 italic">
+                    Con mucho amor,
+                </p>
+                <div class="font-signature text-3xl sm:text-4xl text-amber-300 font-bold glow-text mt-1 flex items-center justify-center gap-2">
+                    <span class="text-rose-400 text-xl">♥</span>
+                    <span>Tu novio Stiven</span>
+                    <span class="text-rose-400 text-xl">♥</span>
+                </div>
+
+                <!-- Bottom Sunflower Emblem -->
+                <div class="mt-4 flex justify-center items-center gap-3">
+                    <div class="h-[1px] w-12 bg-gradient-to-r from-transparent to-amber-400/50"></div>
+                    <span class="text-amber-400 text-lg">🌻</span>
+                    <div class="h-[1px] w-12 bg-gradient-to-l from-transparent to-amber-400/50"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <p class="text-center text-xs text-amber-200/60 mt-4 font-sans">
+            Toca el ramo para soltar un destello de flores ✨
+        </p>
+    </div>
+
+    <script>
+        // --- Theme Switcher Logic ---
+        function setTheme(themeName) {
+            const body = document.getElementById('bg-body');
+            body.className = `${themeName} min-h-screen text-amber-50 flex items-center justify-center p-3 sm:p-6 overflow-x-hidden relative font-body transition-all duration-700`;
+        }
+
+        // --- Falling Petals Animation (HTML5 Canvas) ---
+        const canvas = document.getElementById('petals-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Petal {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = -20 - Math.random() * 50;
+                this.size = 7 + Math.random() * 13;
+                this.speedY = 1 + Math.random() * 2.2;
+                this.speedX = -1 + Math.random() * 2;
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = -2 + Math.random() * 4;
+                this.opacity = 0.6 + Math.random() * 0.4;
+                const colors = ['#FACC15', '#FDE047', '#EAB308', '#FEF08A'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            update() {
+                this.y += this.speedY;
+                this.x += Math.sin(this.y * 0.01) + this.speedX * 0.5;
+                this.rotation += this.rotationSpeed;
+
+                if (this.y > canvas.height + 30) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.globalAlpha = this.opacity;
+
+                ctx.beginPath();
+                ctx.fillStyle = this.color;
+                ctx.moveTo(0, 0);
+                ctx.quadraticCurveTo(this.size / 2, -this.size, 0, -this.size * 2);
+                ctx.quadraticCurveTo(-this.size / 2, -this.size, 0, 0);
+                ctx.fill();
+
+                ctx.restore();
+            }
+        }
+
+        const petalsCount = 38;
+        const petals = [];
+        for (let i = 0; i < petalsCount; i++) {
+            petals.push(new Petal());
+        }
+
+        function animatePetals() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            petals.forEach(petal => {
+                petal.update();
+                petal.draw();
+            });
+            requestAnimationFrame(animatePetals);
+        }
+
+        window.onload = function() {
+            animatePetals();
+        };
+
+        // Bouquet Click Particle Interaction
+        document.getElementById('bouquet-trigger').addEventListener('click', (e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            for (let i = 0; i < 22; i++) {
+                const p = new Petal();
+                p.x = centerX + (Math.random() * 60 - 30);
+                p.y = centerY + (Math.random() * 60 - 30);
+                p.speedY = -2 - Math.random() * 3;
+                p.speedX = (Math.random() - 0.5) * 5;
+                petals.push(p);
+            }
+
+            setTimeout(() => {
+                if (petals.length > petalsCount) {
+                    petals.splice(petalsCount, petals.length - petalsCount);
+                }
+            }, 5000);
+        });
+
+        // --- Soft Romantic Melodic Synthesizer ---
+        let audioCtx = null;
+        let isPlaying = false;
+        let musicInterval = null;
+
+        function playSoftRomanticNotes() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const notes = [261.63, 329.63, 392.00, 493.88, 523.25, 659.25]; // C, E, G, B, C5, E5
+
+            musicInterval = setInterval(() => {
+                if (!isPlaying) return;
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                const freq = notes[Math.floor(Math.random() * notes.length)];
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+                gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.07, audioCtx.currentTime + 0.3);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 2.4);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + 2.5);
+            }, 850);
+        }
+
+        const musicBtn = document.getElementById('bg-music-btn');
+        const musicIcon = document.getElementById('music-icon');
+        const musicText = document.getElementById('music-text');
+
+        musicBtn.addEventListener('click', () => {
+            if (!isPlaying) {
+                isPlaying = true;
+                playSoftRomanticNotes();
+                musicIcon.textContent = '🎶';
+                musicText.textContent = 'Pausar';
+                musicBtn.classList.add('border-amber-300', 'bg-amber-800/80');
+            } else {
+                isPlaying = false;
+                if (musicInterval) clearInterval(musicInterval);
+                musicIcon.textContent = '🎵';
+                musicText.textContent = 'Música suave';
+                musicBtn.classList.remove('border-amber-300', 'bg-amber-800/80');
+            }
+        });
+    </script>
 </body>
 </html>
